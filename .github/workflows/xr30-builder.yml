@@ -46,20 +46,15 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        cp -f ../DIY/diy1.sh ./
-        chmod +x ./diy1.sh && ./diy1.sh
 
     - name: Update & Install feeds
       working-directory: ./openwrt
       run: |
         ./scripts/feeds update -a
 
-        ./scripts/feeds install -a
-
-        cp -f ../DIY/diy2.sh ./        
-        chmod +x ./diy2.sh && ./diy2.sh      
+        ./scripts/feeds install -a    
         
-    - name: Configuration Customization - Build_mt7981_rax3000m
+    - name: Configuration Customization - Build_mt7981_xr30
       env:
         CONFIG_FILE: './config/xr30.config'
       run: |
