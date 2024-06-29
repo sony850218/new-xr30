@@ -1,4 +1,4 @@
-name: Build_mt7981_rax3000m
+name: Build_mt7981_xr30
 
 on: 
   repository_dispatch:
@@ -13,7 +13,7 @@ on:
 #    types: [started]
 
 jobs:
-  Build_mt7981_rax3000m:
+  Build_mt7981_xr30:
     runs-on: ubuntu-20.04
     steps:
     - name: Clone Repository
@@ -93,24 +93,24 @@ jobs:
         
         rom=openwrt/bin/targets/mediatek/mt7981/immortalwrt-mediatek-mt7981-cmcc_rax3000m-squashfs-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/MzWrt-CMCC-RAX3000M-5.4-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/ImmortalWrt-CMCC-RAX3000M-5.4-$(date +%Y%m%d)_${md5}.bin
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
       with:
-        name: CMCC-RAX3000M-OpenWrt
+        name: CMCC-XR30-OpenWrt
         path: ARM_Out/*.bin
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
-        name: rax3000m-config
+        name: xr30-config
         path: openwrt/.config
 
     - name: Upload Packages
       uses: actions/upload-artifact@main
       with:
-        name: CMCC-RAX3000M-Packages
+        name: CMCC-XR30-Packages
         path: openwrt/bin/packages
         
     - name: Generate Tag & Release Name
@@ -118,7 +118,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="MzWrt-CMCC-RAX3000M-$(date +%Y%m%d)"
+        release_name="ImmortalWrt-CMCC-RAX3000M-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT      
 
