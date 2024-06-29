@@ -61,7 +61,7 @@ jobs:
         
     - name: Configuration Customization - Build_mt7981_rax3000m
       env:
-        CONFIG_FILE: './config/rax3000m.config'
+        CONFIG_FILE: './config/xr30.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         cd openwrt && make defconfig
@@ -93,7 +93,7 @@ jobs:
         
         rom=openwrt/bin/targets/mediatek/mt7981/immortalwrt-mediatek-mt7981-cmcc_rax3000m-squashfs-sysupgrade.bin
         getmd5 $rom        
-        cp -a $rom ./ARM_Out/ImmortalWrt-CMCC-RAX3000M-5.4-$(date +%Y%m%d)_${md5}.bin
+        cp -a $rom ./ARM_Out/ImmortalWrt-CMCC-XR30-5.4-$(date +%Y%m%d)_${md5}.bin
                
     - name: Upload Firmwares
       uses: actions/upload-artifact@main
@@ -118,7 +118,7 @@ jobs:
       run: |
         time=$(date +%Y%m%d%H%M%S)
         release_tag="$time"
-        release_name="ImmortalWrt-CMCC-RAX3000M-$(date +%Y%m%d)"
+        release_name="ImmortalWrt-CMCC-XR30-$(date +%Y%m%d)"
         echo "release_name=$release_name" >> $GITHUB_OUTPUT
         echo "release_tag=$release_tag" >> $GITHUB_OUTPUT      
 
